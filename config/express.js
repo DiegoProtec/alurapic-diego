@@ -1,12 +1,12 @@
-var express = require('express')
-    ,app = express()
-    ,bodyParser = require('body-parser')
-    ,routes = require('../app/routes');
+var express = require('express');
+var consign = require('consign');
+var app = express();
 
 app.use(express.static('./public'));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
 
-routes(app);
+consign({cwd: 'app'})
+.include('api')
+.then('routes')
+.into(app);
 
 module.exports = app;
