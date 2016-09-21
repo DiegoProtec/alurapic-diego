@@ -1,24 +1,26 @@
 {
-  "name": "alurapic",
-  "version": "1.0.0",
-  "description": "treino mean",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/diegoprotec/alurapic-diego.git"
-  },
-  "author": "Diego",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/diegoprotec/alurapic-diego/issues"
-  },
-  "homepage": "https://github.com/diegoprotec/alurapic-diego#readme",
-  "dependencies": {
-    "consign": "^0.1.2",
-    "express": "^4.13.3"
-  }
+	"name": "alurapic",
+	"version": "1.0.0",
+	"description": "treino mean",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/diegoprotec/alurapic-diego.git"
+	},
+	"author": "Diego",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/diegoprotec/alurapic-diego/issues"
+	},
+	"homepage": "https://github.com/diegoprotec/alurapic-diego#readme",
+	"dependencies": {
+		"body-parser": "^1.14.1",
+		"consign": "^0.1.2",
+		"express": "^4.13.3",
+		"mongoose": "^4.3.1"
+	}
 }

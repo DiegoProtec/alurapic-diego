@@ -1,36 +1,69 @@
-var fotos = [
-    {_id: 1, titulo: 'Leão', url:'http://www.fundosanimais.com/Minis/leoes.jpg' },
-    {_id: 2, titulo: 'Leão 2', url:'http://www.fundosanimais.com/Minis/leoes.jpg' }
-];
+var mongoose = require('mongoose');
+var model = mongoose.model('Foto');
 
 exports.lista = function (req, res) {
-    res.json(fotos);
-}
+    model
+    .find({})
+    .then(
+        fotos => {
+            console.log(fotos);
+            res.json(fotos);
+        }, 
+        error => {
+            console.log(error);
+            res.sendStatus(500).json(error);
+        }
+    );
+};
 
 exports.buscaPorId = function (req, res) {
+    model
+    .findById(req.params.id)
+    .then(
+        foto => {
+            if(!foto) throw Error('Foto não encontrada');
+            res.json(foto);
+        },
+        error => {
+            console.log(error);
+            res.sendStatus(404).json(error);
+        }
+    );
+};
 
-    var foto = fotos.find(function(foto){
-        return foto._id == req.params.id;
-    });
+exports.atualiza = function(req, res) {
+    model
+    .findByIdAndUpdate(req.params.id, req.body)
+    .then(
+        foto => res.json(foto),
+        error => {
+            console.log(error);
+            res.sendStatus(500).json(error);
+        }
+    );
+};
 
-    res.json(foto);
-}
+exports.adiciona = function (req, res) {
+    model
+    .create(req.body)
+    .then(
+        foto => res.json(foto),
+        error => {
+            console.log(error);
+            res.sendStatus(500).json(error);
+        }
+    );
+};
 
 exports.removePorId = function (req, res) {
-
-    var fotos = fotos.filter(function(foto) {
-        return foto._id != req.params.id;
-    });
-
-    
-}
-
-// var api = {};
-
-// api.lista = function(req, res) {
-//     var fotos = [
-//         {_id: 1, titulo: 'Leão', url:'http://www.fundosanimais.com/Minis/leoes.jpg' },
-//         {_id: 2, titulo: 'Leão 2', url:'http://www.fundosanimais.com/Minis/leoes.jpg' }
-//     ];
-//     res.json(fotos); 
-// };
+    model
+    .remove({_id: req.params.id})
+    .then(
+        () => 
+            res.sendStatus(204),
+        error => {
+            console.log(error);
+            res.sendStatus(500).json(error);
+        }
+    );
+};
