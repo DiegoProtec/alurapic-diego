@@ -1,9 +1,6 @@
-const http = require('http'),
-	app = require('./config/express'),
-	mongoose = require('mongoose');
+const http = require('http');
+var app = require('./config/express');
 
-const banco = 'localhost/alurapic';
-
-require('./config/database')(mongoose, banco);
+require('./config/database')(app.get('mongoose'), app.get('banco'));
 
 http.createServer(app).listen(3000, () => console.log('Servidor rodando na porta 3000'));
